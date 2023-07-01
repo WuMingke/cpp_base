@@ -56,11 +56,45 @@ int *func() {
     return p;
 }
 
-int main() {
-    int *p = func();
-    cout << "result:" << *p << endl;
-    delete p; // 释放内存空间
+//int main() {
+//    int *p = func();
+//    cout << "result:" << *p << endl;
+//    delete p; // 释放内存空间
+//    p = NULL; // 防止野指针
+//
+//    return 0;
+//}
 
+class Student {
+public:
+    int id;
+
+    Student() {
+
+    };
+
+    Student(const Student &s) { // 拷贝构造函数
+        id = s.id;
+        name = s.name; // 浅拷贝
+        // 如果不利用深拷贝在堆区创建新内存，会导致浅拷贝带来的重复释放堆区的问题
+        m_Height = new int(*s.m_Height); // 深拷贝
+    }
+
+    ~Student() { // 析构函数
+        if (m_Height != NULL) {
+            delete m_Height;
+            m_Height = NULL;
+        }
+    };
+private:
+    int name;
+    int *m_Height;
+};
+
+int main() {
+    Student s{};
+    s.id = 1;
+    cout << "result:" << s.id << endl;
     return 0;
 }
 
