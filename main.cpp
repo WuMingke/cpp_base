@@ -86,9 +86,21 @@ public:
             m_Height = NULL;
         }
     };
+
+    virtual void fun1() {
+
+    }
+
 private:
     int name;
     int *m_Height;
+};
+
+class XIAOMING : private Student { // 私有继承
+public:
+    void fun1() override {
+
+    }
 };
 
 int main() {
