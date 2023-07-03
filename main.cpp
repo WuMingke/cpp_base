@@ -103,11 +103,37 @@ public:
     }
 };
 
-int main() {
-    Student s{};
-    s.id = 1;
-    cout << "result:" << s.id << endl;
-    return 0;
+//int main() {
+//    Student s{};
+//    s.id = 1;
+//    cout << "result:" << s.id << endl;
+//    return 0;
+//}
+
+
+class Animal {
+public:
+    virtual void speak() { // 虚函数
+        cout << "Animal speak" << endl;
+    }
+//    auto i = 0;
+};
+
+class Cat : public Animal {
+public:
+    void speak() override {
+        cout << "Cat speak" << endl;
+    }
+};
+
+void doSpeak(Animal &animal) { // 这一行，父类的指针或者引用指向子类对象的时候：Animal &animal = cat;
+    animal.speak();
 }
 
+int main() { // 多态
+
+    Cat cat;
+    doSpeak(cat);
+    return 0;
+}
 
