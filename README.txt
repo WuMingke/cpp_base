@@ -191,7 +191,7 @@
     成员变量  加“m_”前缀
 
 命令：
-    查看文件类结构： cl /d1 reportSingleClassLayout类名 文件名
+    查看文件类结构： cl /d1 reportSingleClassLayout类名 文件名1
     输出预处理后的源码：g++ a.cpp -E -o a.cxx
 
 C++程序的生命周期：
@@ -205,5 +205,73 @@ auto / decltype 自动类型推导关键字
 lambda表达式  [](){}，[]是lambda引出符，()包含参数，{}为函数体
 auto func = [](){};
 
-模版：
-     https://www.bilibili.com/video/BV1et411b73Z?p=167&vd_source=227c4c15d4eeb6633e395ae8184ce348
+智能指针：
+    unique_ptr
+    shared_ptr
+    weak_ptr
+
+模版：=> 泛型
+    函数模版、类模版：template<typename T>
+
+    模版可以重载
+
+    普通类中的成员函数一开始就可以创建
+    类模版中的成员函数在调用时才创建
+
+STL：Standard Template Library 标准模版库，从广义上分为 容器、算法、迭代器
+    六大组件：
+    容器：各种数据结构：vector、list、deque、set、map等
+    算法：sort、find、copy、for_each等
+    迭代器：连接容器和算法
+    仿函数：行为类似函数，可作为算法的某种策略
+    适配器：一种用来修饰容器或者仿函数或迭代器接口的东西
+    空间配置器：负责空间的配置与管理
+
+    vector：
+        与普通数组的区别：数组是静态空间，而vector可以动态扩展
+        动态扩展是指：找到更大的内存空间，然后将原数据拷贝到新空间，并释放原空间
+    string:
+        string 和 char* 区别
+        char* 是一个指针
+        string 是一个类，类内部封装了 char* ，管理这个字符串，是一个 char* 型的容器
+
+    deque:
+        双端数组
+
+    stack:
+        栈，先进后出
+
+    queue:
+        队列，先进先出
+
+    list:
+        链表，STL中的链表是一个双向循环链表
+
+    set:
+        所有元素都会在插入时被自动排序（默认从小到大），底层是二叉树实现
+        set不允许有重复元素
+        multiset允许有重复元素
+        定义仿函数，可以自定义排序顺序
+
+    map:
+        map中所有的元素都是pair，底层是二叉树实现
+        所有元素会根据key自动排序
+        map不允许重复的key
+        multimap允许重复的key
+
+    仿函数：也叫函数对象
+        其实就是重载 operator()
+        谓词：
+            返回bool类型的仿函数称为谓词
+        STL仿函数：
+            plus greater 等。。
+
+
+
+
+
+
+
+
+
+

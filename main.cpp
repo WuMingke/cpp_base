@@ -130,10 +130,100 @@ void doSpeak(Animal &animal) { // 这一行，父类的指针或者引用指向�
     animal.speak();
 }
 
-int main() { // 多态
+//int main() { // 多态
+//
+//    Cat cat;
+//    doSpeak(cat);
+//    return 0;
+//}
 
-    Cat cat;
-    doSpeak(cat);
-    return 0;
+
+template<typename T>
+void mySwap(T &a, T &b) {
+    T temp = a;
+    a = b;
+    b = temp;
 }
 
+template<>
+void mySwap(Student &s1, Student &s2) { // 模版重载
+    s1.id = s2.id;
+}
+
+//int main() {
+//    int a = 10;
+//    int b = 20;
+////    mySwap<int>(a, b); // 显示指定类型
+//    mySwap(a, b); // 自动类型推导
+//    cout << "a=" << a << ",b=" << b << endl;
+//
+//
+//    Student s1;
+//    s1.id = 1;
+//    Student s2;
+//    s2.id = 2;
+//    mySwap(s1, s2);
+//    cout << "s1.id=" << s1.id << endl;
+//    return 0;
+//}
+
+
+#include <vector>
+#include <algorithm>
+
+void myPrint(int p) {
+    cout << "myPrint->item:" << p << endl;
+
+}
+
+void t1() {
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+    v.push_back(40);
+
+//    auto itBegin = v.begin();
+//    auto itEnd = v.end();
+//    while (itBegin != itEnd) {
+//        cout << *itBegin << endl;
+//        itBegin++;
+//    }
+
+    for (const auto &item: v) {
+        cout << item << endl;
+    }
+
+
+    for_each(v.begin(), v.end(), myPrint);
+
+}
+
+
+class MyAdd { // 仿函数
+public:
+    int operator()(int a, int b) {
+        return a + b;
+    }
+};
+
+void t2() {
+    MyAdd m;
+    int result = m(1, 2);
+
+    cout << "result = " << result << endl;
+}
+
+
+void t3() {
+    plus<int> p; // STL仿函数
+    cout << "result = " << p(10, 20) << endl;
+}
+
+
+int main() {
+//    t1();
+//    t2();
+    t3();
+    return 0;
+}
